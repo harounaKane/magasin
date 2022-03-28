@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <th:block th:replace="_commun :: head"></th:block>
+  
+    </head>
+    <body>
+        <th:block th:replace="_commun :: header"></th:block>
+        
+        <main class="container-fluid">
+        	<h2 class="text-center">Inscription</h2>
+        	
+        	<form th:action="@{/user/inscription}" method="post" th:object="${user}" enctype="multipart/form-data" class="row">
+        	
+        		<input type="hidden" th:field="*{id_user}">
+        		
+        		<fieldset class="row">
+        			<legend class="col-form-label col-1 pt-0">Sexe : </legend>
+        			<div class="form-check form-check-inline col-1">
+        				<input type="radio" th:field="*{sexe}" value="femme" class="form-check-input" id="femme">
+        				<label for="femme">Femme</label>
+        			</div>
+        			
+        			<div class="form-check form-check-inline col-1">
+        				<input type="radio" th:field="*{sexe}" value="homme" class="form-check-input" id="homme">
+        				<label for="homme">Homme</label>
+        			</div>
+        			<div th:if="${#fields.hasErrors('sexe')}" th:errors="*{sexe}" class="alert alert-danger"></div>
+        		</fieldset>
+        		
+        		<div class="col-6 form-group">
+        			<label>Prénom</label>
+        			<input type="text" th:field="*{prenom}" class="form-control">
+        			<div th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}" class="alert alert-danger"></div>
+        		</div>
+        		
+        		<div class="col-6 form-group">
+        			<label>Nom</label>
+        			<input type="text" th:field="*{nom}" class="form-control">
+        			<div th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}" class="alert alert-danger"></div>
+        		</div>
+        		
+        		<div class="col-6 form-group">
+        			<label>Login</label>
+        			<input type="text" th:field="*{login}" class="form-control">
+        			<div th:if="${#fields.hasErrors('login')}" th:errors="*{login}" class="alert alert-danger"></div>
+        		</div>
+        		
+        		<div class="col-6 form-group">
+        			<label>Mot de passe</label>
+        			<input type="password" th:field="*{mdp}" class="form-control">
+        			<div th:if="${#fields.hasErrors('mdp')}" th:errors="*{mdp}" class="alert alert-danger"></div>
+        		</div>
+        		
+        		<div class="col-6 form-group">
+        			<label>Avatar</label>
+        			<input type="file" name="photo" class="form-control" accept="image/*">
+        		</div>
+        		
+        		<div class="col-6"></div>
+        		<div class="col-6"></div>
+        		
+        		<div class="col-6 form-group">
+        			<button type="submit" class="btn btn-outline-success">Envoyer</button>
+        			<button type="reset" class="btn btn-outline-danger">Annuler</button>
+        		</div>
+        	
+        	</form>
+        	
+        </main>
+            
+        <!-- Footer-->
+		 <th:block th:replace="_commun :: footer"></th:block>
+    </body>
+</html>

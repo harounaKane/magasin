@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+header{
+/* 	background: url([[@{/img/home-bg.jpg}]]); */
+}
+
+
+
+.mastheadBis{
+	position: relative;
+    margin-bottom: 3rem;
+    padding-top: calc(8rem + 57px);
+    background: no-repeat center center;
+    background-color: #6c757d;
+    background-size: cover;
+    background-attachment: scroll;
+}
+
+header img{
+	width: 10%
+}

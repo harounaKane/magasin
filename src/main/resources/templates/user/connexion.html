@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <th:block th:replace="_commun :: head"></th:block>
+  
+    </head>
+    <body>
+        <th:block th:replace="_commun :: header"></th:block>
+        
+        <main class="container-fluid">
+        	<h2 class="text-center">Connexion</h2>
+        	
+        	<form th:action="@{/user/connexion}" method="post" class="row">
+        	
+        	
+        	
+        		<div class="col-6 form-group">
+        			<label>Login</label>
+        			<input type="text" name="login" class="form-control">
+        		</div>
+        		
+        		<div class="col-6 form-group">
+        			<label>Mot de passe</label>
+        			<input type="password" name="mdp" class="form-control">
+        		</div>
+    
+   
+        		<div class="col-6 form-group mt-3">
+        			<button type="submit" class="btn btn-outline-success">Envoyer</button>
+        			<button type="reset" class="btn btn-outline-danger">Annuler</button>
+        		</div>
+        	
+        	</form>
+        	
+        </main>
+            
+        <!-- Footer-->
+		 <th:block th:replace="_commun :: footer"></th:block>
+    </body>
+</html>
