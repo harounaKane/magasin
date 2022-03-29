@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <th:block th:replace="_commun :: head"></th:block>
+  
+    </head>
+    <body>
+        <th:block th:replace="_commun :: header"></th:block>
+        
+        <main class="container-fluid">
+        	<h2 class="text-center">New article</h2>
+      
+        	<form th:action="@{/article/new}" method="post" th:object="${article}" enctype="multipart/form-data" class="row">
+        	
+        		<div class="col-6 form-group mb-2">
+        			<label>Libelle</label>
+        			<input type="text" th:field="*{libelle}" class="form-control">
+        		</div>
+        		
+        		<div class="form-group col-6 mb-2">
+        			<label>Catégorie</label>
+        			<select name="categorie" class="form-control">
+        				<option th:each="cat : ${categories}" th:text="${cat.categorie}" th:value="${cat.categorie}" />
+        			</select>
+        		</div>
+        		
+        		<div class="col-3 form-group">
+        			<label>Prix</label>
+        			<input type="text" th:field="*{prix}" class="form-control">
+        		</div>
+        		
+        		<div class="col-3 form-group">
+        			<label>Quantité</label>
+        			<input type="text" th:field="*{quantity}" class="form-control">
+        		</div>
+        		
+        		<div class="col-6 form-group">
+        			<label>Logo</label>
+        			<input type="file" name="photo" accept="image/*" class="form-control">
+        		</div>
+   
+        		<div class="col-6 form-group mt-3">
+        			<button type="submit" class="btn btn-outline-success">Envoyer</button>
+        			<button type="reset" class="btn btn-outline-danger">Annuler</button>
+        		</div>
+        	
+        	</form>
+        	
+        </main>
+            
+        <!-- Footer-->
+		 <th:block th:replace="_commun :: footer"></th:block>
+    </body>
+</html>

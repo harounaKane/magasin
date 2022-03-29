@@ -52,7 +52,7 @@ public class UserController {
         User user = userRepository.findUserByLoginAndMdp(login, mdp);
         session.setAttribute( "user", user );
         
-        return "user/connexion";
+        return "redirect:/";
     }
     
     @GetMapping("/user/logOut")
@@ -79,6 +79,13 @@ public class UserController {
             return "user/inscription";
         }
         
+        if( userRepository.findUserByLogin(user.getLogin()) != null ) {
+            model.addAttribute( "user", user );
+            model.addAttribute( "unique", "Ce login existe déjà" );
+            
+            return "user/inscription";
+        }
+        
         String fileName = StringUtils.cleanPath( multipartFile.getOriginalFilename() );
         
         if( !fileName.isEmpty() ) {
@@ -88,7 +95,7 @@ public class UserController {
             
             user.setAvatar( fileName );
         }
-            
+        
         userRepository.save( user );
         
         return "redirect:/";

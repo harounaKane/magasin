@@ -26,13 +26,13 @@
         				<input type="radio" th:field="*{sexe}" value="homme" class="form-check-input" id="homme">
         				<label for="homme">Homme</label>
         			</div>
-        			<div th:if="${#fields.hasErrors('sexe')}" th:errors="*{sexe}" class="alert alert-danger"></div>
+        			<div th:if="${#fields.hasErrors('sexe')}" th:errors="*{sexe}" class="alert alert-danger col-6 p-1"></div>
         		</fieldset>
         		
         		<div class="col-6 form-group">
         			<label>Prénom</label>
         			<input type="text" th:field="*{prenom}" class="form-control">
-        			<div th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}" class="alert alert-danger"></div>
+        			<div th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}" class="alert alert-danger m-1 p-0"></div>
         		</div>
         		
         		<div class="col-6 form-group">
@@ -45,6 +45,7 @@
         			<label>Login</label>
         			<input type="text" th:field="*{login}" class="form-control">
         			<div th:if="${#fields.hasErrors('login')}" th:errors="*{login}" class="alert alert-danger"></div>
+        			<div th:if="${unique}" th:text="${unique}" class="alert alert-danger"></div>
         		</div>
         		
         		<div class="col-6 form-group">
