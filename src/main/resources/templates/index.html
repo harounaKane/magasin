@@ -9,7 +9,36 @@
         <th:block th:replace="_commun :: header"></th:block>
         
         <main class="container-fluid">
-        	main
+        	<form th:action="@{/article/ByCategorie}" th:object="${categorie}" method="post" class="pagination mb-3 ms-2">
+        		<select th:field="*{categorie}" class="p-1">
+        			<option value="0"> -- Choix --</option>
+        			<option th:each="categorie : ${categories}" 
+        				    th:text="${categorie.categorie}" 
+        				    th:value="${categorie.categorie}"
+        				    class="page-item p-1"
+        				   />
+        		</select>
+        		<button class="btn btn-outline-success page-item" type="submit">Chercher</button>
+        	</form>
+       
+        	<div class="d-flex row">
+	        	<div class="card m-2 col-3" style="max-width: 540px;" th:each="article : ${articles}">
+					  <div class="row g-0">
+					    <div class="col-md-4">
+					      <img alt="" th:src="${article.image}" class="img-fluid rounded-start">
+					    </div>
+					    <div class="col-md-8">
+					      <div class="card-body">
+					        <h5 class="card-title">[[${article.libelle}]]</h5>
+					        <p class="card-text">[[${#strings.substring(article.description,0, 20)}]]...</p>
+					        <p class="card-text"><small class="text-muted">[[${article.prix}]]€</small></p>
+					      </div>
+					    </div>
+					  </div>
+				</div>
+			</div>
+        	
+        	
         </main>
             
         <!-- Footer-->

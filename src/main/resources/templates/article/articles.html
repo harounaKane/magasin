@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <th:block th:replace="_commun :: head"></th:block>
+  
+    </head>
+    <body>
+        <th:block th:replace="_commun :: header"></th:block>
+        
+        <main class="container-fluid">
+        	<h2 class="text-center">Liste article</h2>
+      
+        	<table class="table table-striped">
+			  <tr class="table-dark">
+			    <th>Logo</th>
+			    <th>Libellé</th>
+			    <th>Prix</th>
+			    <th>Quantité</th>
+			    <th>Catégorie</th>
+			    <th>Actions</th>
+			  </tr>
+			  
+			  <tr th:each="article : ${articles}">
+			  	<td>
+			  		<a th:href="@{/article/detail/__${article.id_art}__}"><img alt="" th:src="${article.image}"></a>
+			  	</td>
+			  	<td>[[${article.libelle}]]</td>
+			  	<td>[[${article.prix}]]</td>
+			  	<td>[[${article.quantity}]]</td>
+			  	<td>[[${article.categorie.categorie}]]</td>
+			  	<td> - </td>			  	
+			  </tr>
+			
+			</table>
+        	
+        </main>
+            
+        <!-- Footer-->
+		 <th:block th:replace="_commun :: footer"></th:block>
+    </body>
+</html>

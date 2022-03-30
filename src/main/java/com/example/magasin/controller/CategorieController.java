@@ -21,7 +21,7 @@ public class CategorieController {
     public String categorie(Model model) {
         model.addAttribute("categorie", new Categorie());
         model.addAttribute("categories", categorieRipository.findAll());
-        
+                
         return "categorie/categorie";
     }
     

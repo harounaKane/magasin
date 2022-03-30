@@ -21,7 +21,7 @@ public class Categorie {
 
     @Override
     public String toString() {
-        return "Categorie [categorie=" + categorie +"]";
+        return "Categorie [categorie=" + categorie + ", articles= "+ articles +"]";
     }
 
 }

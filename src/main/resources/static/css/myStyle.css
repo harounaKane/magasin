@@ -19,3 +19,10 @@ header{
 header img{
 	width: 70%
 }
+
+img{max-width: 100%}
+
+td{
+	height: 50px;
+	width: 50px
+}

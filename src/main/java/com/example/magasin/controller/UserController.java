@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.magasin.mesService.MyServices;
+import com.example.magasin.modele.Categorie;
 import com.example.magasin.modele.User;
+import com.example.magasin.repository.ArticleRepository;
+import com.example.magasin.repository.CategorieRepository;
 import com.example.magasin.repository.UserRepository;
 
 @Controller
@@ -25,10 +28,17 @@ public class UserController {
     
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    CategorieRepository categorieRipository;
+    @Autowired
+    ArticleRepository articleRepository;
     
     
     @GetMapping("/")
-    public String home() {
+    public String home(Model model) {
+        model.addAttribute( "categorie", new Categorie() );
+        model.addAttribute( "categories", categorieRipository.findAll() );
+        model.addAttribute("articles", articleRepository.findAll());
         
         return "index";
     }
