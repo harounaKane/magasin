@@ -12,6 +12,8 @@
         	<h2 class="text-center">New article</h2>
       
         	<form th:action="@{/article/new}" method="post" th:object="${article}" enctype="multipart/form-data" class="row">
+        		
+        		<input type="hidden" th:field="*{id_art}">
         	
         		<div class="col-6 form-group mb-2">
         			<label>Libelle</label>

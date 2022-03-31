@@ -24,6 +24,9 @@
         		<div class="col-6 form-group">
         			<label>Catégorie</label>
         			<input type="text" th:field="*{categorie}" class="form-control">
+        			<div th:if="${#fields.hasErrors('categorie')}" 
+        				th:errors="*{categorie}"
+        				class="alert alert-danger"></div>
         		</div>
    
         		<div class="col-6 form-group mt-3">

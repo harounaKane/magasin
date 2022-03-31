@@ -25,7 +25,9 @@
 	        	<div class="card m-2 col-3" style="max-width: 540px;" th:each="article : ${articles}">
 					  <div class="row g-0">
 					    <div class="col-md-4">
-					      <img alt="" th:src="${article.image}" class="img-fluid rounded-start">
+					      <a th:href="@{/article/articleToPanier/__${article.id_art}__}">
+					      	<img alt="" th:src="${article.image}" class="img-fluid rounded-start">
+					      </a>
 					    </div>
 					    <div class="col-md-8">
 					      <div class="card-body">

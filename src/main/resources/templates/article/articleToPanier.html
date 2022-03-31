@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <th:block th:replace="_commun :: head"></th:block>
+  
+    </head>
+    <body>
+        <th:block th:replace="_commun :: header"></th:block>
+        
+        <main class="container-fluid">
+        	<h2 class="text-center">Détail article</h2>
+      
+      	<div class="row">
+      		<img alt="" th:src="@{${article.image}}" class="col-4">
+      		
+      		<div class="col-6">
+      			<div class="fw-bold"> [[${article.libelle}]] </div>
+      			<div class="fst-italic my-2"> [[${article.description}]] </div>
+      			<div> [[${article.prix}]]€ </div>
+      		</div>
+      		
+      		<div class="col-2">
+      			<form action="">
+      				<ul class="pagination">
+      					<li class="page-item">
+      						<a href="#" id="moins" class="page-link btn btn-danger"><b>-</b></a>
+      					</li>
+      					
+      					<li class="page-item">
+      						<input type="text" id="input" value="1" class="form-control text-center" style="max-width: 55px" />
+      					</li>
+      					<li class="page-item">
+      						<a href="" id="plus" class="page-link btn btn-success"><b>+</b></a>
+      					</li>
+      					<li class="page-item">
+      						<button class="" type="submit">ADD</button>
+      					</li>
+      				</ul>
+      			</form>
+      		
+      		</div>
+      		
+      	</div>
+        	
+        </main>
+            
+        <!-- Footer-->
+		 <th:block th:replace="_commun :: footer"></th:block>
+		 <script type="text/javascript">
+		 
+		 byId("plus").addEventListener("click", (e) => {
+			 e.preventDefault();
+			 byId('input').value++;
+			 console.log( byId("moins") );
+		 });
+		 
+		 byId("moins").addEventListener("click", (e) => {
+			 e.preventDefault();
+			 byId('input').value--;
+			 if(byId('input').value <= 0){
+				 byId('input').value = 1;
+			 }
+		 });
+		 
+		 
+		 	function byId(id){return document.getElementById(id); }
+		 </script>
+    </body>
+</html>

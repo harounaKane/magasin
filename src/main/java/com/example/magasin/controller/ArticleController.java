@@ -2,10 +2,15 @@ package com.example.magasin.controller;
 
 import java.io.IOException;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,6 +47,13 @@ public class ArticleController {
         
         return "/article/article";
     }
+    
+    @GetMapping("/article/articleToPanier/{id_art}")
+    public String articleToPanier(Model model, @PathVariable("id_art") int id_art) {
+        model.addAttribute("article", articleRepository.getById(id_art) );
+        
+        return "/article/articleToPanier";
+    }
 
     @GetMapping("/article/new")
     public String articleForm(Model model) {
@@ -61,7 +73,19 @@ public class ArticleController {
     }
     
     @PostMapping("/article/new")
-    public String article(@RequestParam("categorie") String categorie, @ModelAttribute Article article, @RequestParam("photo") MultipartFile multipartFile) throws IOException {
+    public String article(@RequestParam("categorie") String categorie, 
+                          @Valid @ModelAttribute("article") Article article, 
+                          @RequestParam("photo") MultipartFile multipartFile,
+                          BindingResult result,
+                          Model model
+            ) throws IOException {
+        
+        if( result.hasErrors() ) {
+            model.addAttribute("article", new Article());
+            model.addAttribute("categories", categorieRipository.findAll());
+            
+            return "article/articleForm";
+        }
         
         String fileName = StringUtils.cleanPath( multipartFile.getOriginalFilename() );
         
