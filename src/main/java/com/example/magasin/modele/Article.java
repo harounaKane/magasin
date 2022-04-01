@@ -1,14 +1,20 @@
 package com.example.magasin.modele;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
 
 import lombok.Data;
 
@@ -20,6 +26,7 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_art;
     @NotBlank
+    @Column(unique = true)
     @Size(min = 2, max = 15)
     private String libelle;
     
@@ -27,13 +34,17 @@ public class Article {
     private float prix;
     @Min(1)
     private int quantity;
+    
     private String logo;
     private String description;
     
     @ManyToOne
     @JoinColumn( name = "categorie", referencedColumnName = "categorie" )
     private Categorie categorie;
-
+    
+    @OneToMany(mappedBy = "article")
+    private List<Panier> panier = new ArrayList<>();
+    
     @Override
     public String toString() {
         return "Article [id_art=" + id_art + ", libelle=" + libelle + ", prix=" + prix + ", quantity=" + quantity

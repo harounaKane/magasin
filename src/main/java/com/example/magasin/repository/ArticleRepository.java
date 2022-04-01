@@ -11,4 +11,6 @@ public interface ArticleRepository extends JpaRepository<Article, Integer>{
 
     List<Article> findByCategorie( Categorie categorie );
 
+    Article findByLibelle( String libelle );
+
 }

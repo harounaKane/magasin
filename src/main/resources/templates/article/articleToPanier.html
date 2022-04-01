@@ -21,22 +21,24 @@
       		</div>
       		
       		<div class="col-2">
-      			<form action="">
+      			<form th:action="@{/add/panier}" method="post" th:object="${panier}">
+      				<input type="hidden" name="user" th:value="${session.user.id_user}">
+      				<input type="hidden" name="article" th:value="${article.id_art}">
       				<ul class="pagination">
       					<li class="page-item">
-      						<a href="#" id="moins" class="page-link btn btn-danger"><b>-</b></a>
+      						<a href="#" id="moins" class="page-link"><b>-</b></a>
       					</li>
       					
       					<li class="page-item">
-      						<input type="text" id="input" value="1" class="form-control text-center" style="max-width: 55px" />
+      						<input type="text" th:field="*{quantity}" id="input" value="1" class="form-control text-center" style="max-width: 55px; height: 45px;" />
       					</li>
       					<li class="page-item">
-      						<a href="" id="plus" class="page-link btn btn-success"><b>+</b></a>
-      					</li>
-      					<li class="page-item">
-      						<button class="" type="submit">ADD</button>
+      						<a href="" id="plus" class="page-link"><b>+</b></a>
       					</li>
       				</ul>
+   					<div class="page-item">
+   						<button class="btn btn-outline-success p-1" type="submit">ajouter au panier</button>
+   					</div>
       			</form>
       		
       		</div>

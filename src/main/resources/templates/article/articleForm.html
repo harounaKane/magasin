@@ -18,11 +18,13 @@
         		<div class="col-6 form-group mb-2">
         			<label>Libelle</label>
         			<input type="text" th:field="*{libelle}" class="form-control">
+        			<div th:if="${#fields.hasErrors('libelle')}" th:errors="*{libelle}" class="alert alert-danger"></div>
+        			<div th:if="${not #lists.isEmpty(libelleUnique)}" th:text="${libelleUnique}" class="alert alert-danger"></div>
         		</div>
         		
         		<div class="form-group col-6 mb-2">
         			<label>Catégorie</label>
-        			<select name="categorie" class="form-control">
+        			<select th:field="*{categorie}" class="form-control">
         				<option th:each="cat : ${categories}" th:text="${cat.categorie}" th:value="${cat.categorie}" />
         			</select>
         		</div>
@@ -30,16 +32,19 @@
         		<div class="col-3 form-group">
         			<label>Prix</label>
         			<input type="text" th:field="*{prix}" class="form-control">
+        			<div th:if="${#fields.hasErrors('prix')}" th:errors="*{prix}" class="alert alert-danger"></div>
         		</div>
         		
         		<div class="col-3 form-group">
         			<label>Quantité</label>
         			<input type="text" th:field="*{quantity}" class="form-control">
+        			<div th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" class="alert alert-danger"></div>
         		</div>
         		
         		<div class="col-6 form-group">
         			<label>Logo</label>
         			<input type="file" name="photo" accept="image/*" class="form-control">
+        			<div th:if="${not #lists.isEmpty(imgError)}" th:text="${imgError}" class="alert alert-danger"></div>
         		</div>
    
         		<div class="col-6 form-group mt-3">

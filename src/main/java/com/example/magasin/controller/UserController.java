@@ -21,6 +21,7 @@ import com.example.magasin.modele.Categorie;
 import com.example.magasin.modele.User;
 import com.example.magasin.repository.ArticleRepository;
 import com.example.magasin.repository.CategorieRepository;
+import com.example.magasin.repository.PanierRepository;
 import com.example.magasin.repository.UserRepository;
 
 @Controller
@@ -31,7 +32,9 @@ public class UserController {
     @Autowired
     CategorieRepository categorieRipository;
     @Autowired
-    ArticleRepository articleRepository;
+    ArticleRepository articleRepository;  
+    @Autowired
+    PanierRepository panierRepository;
     
     
     @GetMapping("/")
@@ -61,7 +64,7 @@ public class UserController {
         
         User user = userRepository.findUserByLoginAndMdp(login, mdp);
         session.setAttribute( "user", user );
-        
+        session.setAttribute( "panier", panierRepository.findAll() );
         return "redirect:/";
     }
     

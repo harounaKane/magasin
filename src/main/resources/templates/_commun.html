@@ -51,8 +51,17 @@
                         <li class="nav-item">
                         	<a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a>
                         </li>
+                        
+                         
                     </ul>
                 </div>
+            </div>
+            <div th:if="${session.user}">
+            	<a class="" href="contact.html">
+					<i class="fa-solid fa-cart-shopping border border-3 rounded-circle p-3 m-0">
+					</i>
+					<span th:text="${#lists.size(session.panier)}" class="text-danger m-0"></span>
+				</a>
             </div>
         </nav>
         <!-- Page Header-->
