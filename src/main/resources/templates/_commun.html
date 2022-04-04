@@ -20,6 +20,7 @@
 	<th:block th:fragment="header">
 		<!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+        
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" th:href="@{/}">Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,16 +53,16 @@
                         	<a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a>
                         </li>
                         
+			            <div th:if="${session.user}">
+			            	<a class="text-end" href="contact.html">
+								<i class="fa-solid fa-cart-shopping border border-3 rounded-circle p-3 m-0">
+								</i>
+								<span th:text="${#lists.size(session.panier)}" class="panier text-danger m-0"></span>
+							</a>
+			            </div>
                          
                     </ul>
                 </div>
-            </div>
-            <div th:if="${session.user}">
-            	<a class="" href="contact.html">
-					<i class="fa-solid fa-cart-shopping border border-3 rounded-circle p-3 m-0">
-					</i>
-					<span th:text="${#lists.size(session.panier)}" class="text-danger m-0"></span>
-				</a>
             </div>
         </nav>
         <!-- Page Header-->
@@ -81,6 +82,7 @@
             	<img alt="" th:src="@{'/imguser/' + ${session.user.avatar}}" class="img-fluid rounded">
             </div>
         </header>
+        <div class="container alert alert-success text-center" th:text="${message}" th:if="${message}"></div>
 	</th:block>
 	
 	

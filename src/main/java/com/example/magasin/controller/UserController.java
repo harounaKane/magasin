@@ -60,11 +60,20 @@ public class UserController {
     }
     
     @PostMapping("/user/connexion")
-    public String connexion(@RequestParam String login, @RequestParam String mdp, HttpSession session) {
+    public String connexion(@RequestParam String login, 
+                            @RequestParam String mdp, 
+                            @RequestParam(required = false) String referer, 
+                            HttpSession session
+                            ) {
         
         User user = userRepository.findUserByLoginAndMdp(login, mdp);
         session.setAttribute( "user", user );
-        session.setAttribute( "panier", panierRepository.findAll() );
+        session.setAttribute( "panier", panierRepository.findByUser(user) );
+        
+        if( referer != null ) {
+            return "redirect:" + referer;
+        }
+        
         return "redirect:/";
     }
     

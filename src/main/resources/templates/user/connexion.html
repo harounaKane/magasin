@@ -13,7 +13,7 @@
         	
         	<form th:action="@{/user/connexion}" method="post" class="row">
         	
-        	
+        		<input type="hidden" th:value="${referer}" th:if="${referer}" name="referer"/>
         	
         		<div class="col-6 form-group">
         			<label>Login</label>

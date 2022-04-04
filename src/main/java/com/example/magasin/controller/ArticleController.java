@@ -54,11 +54,7 @@ public class ArticleController {
                                    ) {
         
         model.addAttribute("article", articleRepository.getById(id_art) );
-        
-        if( session.getAttribute( "user" ) == null ) {
-            return "redirect:/user/connexion";
-        }
-        
+    
         model.addAttribute( "panier", new Panier() );
         return "/article/articleToPanier";
     }

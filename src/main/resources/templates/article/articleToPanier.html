@@ -22,7 +22,6 @@
       		
       		<div class="col-2">
       			<form th:action="@{/add/panier}" method="post" th:object="${panier}">
-      				<input type="hidden" name="user" th:value="${session.user.id_user}">
       				<input type="hidden" name="article" th:value="${article.id_art}">
       				<ul class="pagination">
       					<li class="page-item">
