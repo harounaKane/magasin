@@ -28,8 +28,8 @@ td{
 }
 
 .panier{
-	position: absolute;
-	top: 23px;
-    right: 168px;
-    z-index: auto;
+	position: relative;
+	z-index: 1;
+    left: -25px;
+    top: -10px;
 }

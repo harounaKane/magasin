@@ -54,10 +54,10 @@
                         </li>
                         
 			            <div th:if="${session.user}">
-			            	<a class="text-end" href="contact.html">
-								<i class="fa-solid fa-cart-shopping border border-3 rounded-circle p-3 m-0">
+			            	<a class="text-end" th:href="@{/panier/__${session.user.prenom}__/__${session.user.id_user}__}">
+								<i class="fa-solid fa-cart-shopping border border-3 rounded-circle p-3">
 								</i>
-								<span th:text="${#lists.size(session.panier)}" class="panier text-danger m-0"></span>
+								<span th:text="${#lists.size(session.panier)}" class="panier text-danger"></span>
 							</a>
 			            </div>
                          

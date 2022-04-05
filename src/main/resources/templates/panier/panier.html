@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <th:block th:replace="_commun :: head"></th:block>
+  
+    </head>
+    <body>
+        <th:block th:replace="_commun :: header"></th:block>
+        
+        <main class="container-fluid">
+        	<h2 class="text-center">Mon panier</h2>
+        	
+        	<div class="row mx-1">
+        		<div class="col-8">
+        			<div class="row">
+        				<div class="card mb-3" th:each="panier, status : ${paniers}">
+        					<div class="card-body row">
+        						<div class="col-1 text-center">
+        							[[${status.count}]]
+        							<div><i class="fas fa-trash text-danger"></i></div>
+        						</div>
+        						<div class="col-4">
+        							<img alt="logo" th:src="@{'/imgArticle/'+${panier.article.logo}}">
+        						</div>
+        						<div class="col-7">
+        							<div class="fw-bold mb-2 text-primary">
+        								<div>[[${panier.article.libelle}]]</div>
+        								<span>quantité disponible : [[${panier.article.quantity}]]</span>
+        							</div>
+        							<form th:action="@{/add/panier}" method="post">
+					      				<input type="hidden" name="article" value="">
+					      				<ul class="pagination">
+					      					<li class="page-item">
+					      						<a href="#" id="moins" class="page-link"><b>-</b></a>
+					      					</li>
+					      					
+					      					<li class="page-item">
+					      						<input readonly type="text" id="input" th:value="${panier.quantity}" class="form-control text-center" style="max-width: 55px; height: 45px;" />
+					      					</li>
+					      					<li class="page-item">
+					      						<a href="#" id="plus" class="page-link"><b>+</b></a>
+					      					</li>
+					      				</ul>
+					      			</form>
+					      			<div>X 250</div>
+        						</div>
+        					</div>
+        				</div>
+        			</div>
+        		</div>
+        		<div class="col-4">
+        			TOTAL
+        			<div class="my-2">25000€</div>
+        			<a href="#" class="btn btn-primary">Continuer mes achats</a>
+        		</div>
+        	</div>
+        	
+        	
+        </main>
+            
+        <!-- Footer-->
+		 <th:block th:replace="_commun :: footer"></th:block>
+    </body>
+</html>
