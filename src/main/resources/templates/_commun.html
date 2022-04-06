@@ -30,25 +30,31 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         
-                        <li class="nav-item">
-                        	<a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/user/inscription}">Inscription</a>
-                        </li>
-                        <li class="nav-item">
-                        	<a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/user/connexion}">Connexion</a>
-                        </li>
-                        <li class="nav-item">
-                        	<a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/categorie/categorie}">Catégorie</a>
-                        </li>
-                        <li class="nav-item">
-                        	<a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/article/articles}">Article</a>
-                        </li>
-                        
-                        <li class="nav-item">
-                        	<a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/article/new}">New Article</a>
-                        </li>
-                        <li class="nav-item">
-                        	<a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/user/logOut}">Déconnexion</a>
-                        </li>
+                        <th:block th:if="${session.user}">
+                        	<th:block th:if="${session.user.statut == 'ADMIN'}">
+		                        <li class="nav-item">
+		                        	<a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/categorie/categorie}">Catégorie</a>
+		                        </li>
+		                        <li class="nav-item">
+		                        	<a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/article/articles}">Article</a>
+		                        </li>
+		                        
+		                        <li class="nav-item">
+		                        	<a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/article/new}">New Article</a>
+		                        </li>
+	                        </th:block>
+	                        <li class="nav-item">
+	                        	<a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/user/logOut}">Déconnexion</a>
+	                        </li>
+	                    </th:block>
+	                    <th:block th:unless="${session.user}">
+	                    	 <li class="nav-item">
+	                        	<a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/user/inscription}">Inscription</a>
+	                        </li>
+	                        <li class="nav-item">
+	                        	<a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/user/connexion}">Connexion</a>
+	                        </li>
+	                    </th:block>
                         <li class="nav-item">
                         	<a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a>
                         </li>

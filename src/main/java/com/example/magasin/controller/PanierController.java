@@ -54,7 +54,7 @@ public class PanierController {
         
        panierRepository.save( panier );
         
-        session.setAttribute( "panier", panierRepository.findAll() );
+        session.setAttribute( "panier", panierRepository.findByUser( panier.getUser() ) );
         
         return "redirect:/";
     }
@@ -64,14 +64,26 @@ public class PanierController {
     @GetMapping("/panier/{user}/{user_id}")
     public String panier(@PathVariable("user") String userName,
                          @PathVariable("user_id") int userId,
-                         Model model
+                         Model model, HttpSession session
             ) {
         
         List<Panier> panier = panierRepository.findByUser( userRepository.getById( userId ) );
         
         model.addAttribute( "paniers", panier );
+        session.setAttribute( "panier", panierRepository.findByUser( userRepository.getById( userId ) ) );
         
         return "panier/panier";
+    }
+    
+    
+    @GetMapping("/delete/{id_panier}")
+    public String panier(@PathVariable("id_panier") int id_panier, HttpSession session) {
+        System.out.println( id_panier );
+        panierRepository.delete( panierRepository.getById( id_panier ) );
+        
+        User user = (User) session.getAttribute( "user" );
+        
+        return "redirect:/panier/" + user.getPrenom()+"/"+user.getId_user();
     }
     
 

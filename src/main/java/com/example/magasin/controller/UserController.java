@@ -90,13 +90,14 @@ public class UserController {
     public String inscription(Model model, 
                 @Valid @ModelAttribute User user,
                 BindingResult result,
-                @RequestParam("photo") MultipartFile multipartFile
+                @RequestParam("photo") MultipartFile multipartFile,
+                @RequestParam("mdpBis") String mdpBis
                 ) throws IOException {
-        
-        
-        if( result.hasErrors() ) {
+
+        if( result.hasErrors() || !user.getMdp().equals( mdpBis ) ) {
             model.addAttribute( "user", user );
             model.addAttribute( "errors", result );
+            model.addAttribute( "mdpConfirme", "les deux mdp ne correspondent pas" );
             
             return "user/inscription";
         }
@@ -118,7 +119,7 @@ public class UserController {
             user.setAvatar( fileName );
         }
         
-        userRepository.save( user );
+       // userRepository.save( user );
         
         return "redirect:/";
     }

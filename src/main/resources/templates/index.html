@@ -21,7 +21,6 @@
         		<button class="btn btn-outline-success page-item" type="submit">Chercher</button>
         	</form>
        
-
 	        	<div class="d-flex row justify-content-center" style="max-width: 100%;">
 	        	
 	        		<div class="card m-4 col-2 col-md-4" style="width: 18rem;" th:each="article : ${articles}">
@@ -35,12 +34,10 @@
 					</div>
 	        	
 				</div>
-
-        	
         	
         </main>
             
         <!-- Footer-->
-		 <th:block th:replace="_commun :: footer"></th:block>
+		<th:block th:replace="_commun :: footer"></th:block>
     </body>
 </html>

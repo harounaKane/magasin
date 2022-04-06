@@ -48,10 +48,16 @@
         			<div th:if="${unique}" th:text="${unique}" class="alert alert-danger"></div>
         		</div>
         		
-        		<div class="col-6 form-group">
+        		<div class="col-3 form-group">
         			<label>Mot de passe</label>
-        			<input type="password" th:field="*{mdp}" class="form-control">
+        			<input id="mdp" type="password" th:field="*{mdp}" class="form-control">
+        			<div id="mdpMsg"></div>
         			<div th:if="${#fields.hasErrors('mdp')}" th:errors="*{mdp}" class="alert alert-danger"></div>
+        		</div>
+        		<div class="col-3 form-group">
+        			<label>Confirmation mot de passe</label>
+        			<input type="password" name="mdpBis" class="form-control">
+        			<div th:if="${mdpConfirme}" th:text="${mdpConfirme}" class="alert alert-danger"></div>
         		</div>
         		
         		<div class="col-6 form-group">
@@ -73,5 +79,32 @@
             
         <!-- Footer-->
 		 <th:block th:replace="_commun :: footer"></th:block>
+		 
+		 <script type="text/javascript">
+		 
+		 	let mdp = document.getElementById("mdp");
+			let mdpCount = "";
+			let msg = document.getElementById("mdpMsg");
+	
+		 	mdp.addEventListener("keyup", (e) => {
+		 		console.log(e.key)
+		 		mdpCount += e.key;
+		 	});
+		 	
+		 	mdp.addEventListener("blur", (e) => {
+		 		if( mdpCount.length < 4 ){
+		 			mdp.style.border = "red 1px solid";
+			 		console.log(mdpCount.length)
+			 		msg.style.color = "red";
+			 		msg.innerHTML = "mot de passe pas suffisant";
+		 		}else{
+		 			mdp.style.border = "1px solid #000";
+		 			msg.innerHTML = "";
+		 		}
+		 	});
+		 
+		 </script>
+		 
+		 
     </body>
 </html>
