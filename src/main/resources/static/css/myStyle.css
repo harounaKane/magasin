@@ -1,5 +1,8 @@
 @charset "utf-8";
 
+
+*:hover{transition:  1s 0s;}
+
 header{
 /* 	background: url([[@{/img/home-bg.jpg}]]); */
 }
@@ -33,3 +36,21 @@ td{
     left: -25px;
     top: -10px;
 }
+
+.bc{
+	background-color: rgba(0, 0, 0, .5);
+}
+
+#articleOpacity:hover > div{opacity: .5}
+
+#articleOpacity:hover > div:hover {
+  transform: scale(1.01); 
+  opacity: 1
+}
+
+
+
+
+
+
+
