@@ -15,9 +15,10 @@
       		<img alt="" th:src="@{${article.image}}" class="col-4">
       		
       		<div class="col-6">
-      			<div class="fw-bold"> [[${article.libelle}]] </div>
+      			<div class="fw-bold"> [[${article.libelle}]]  </div>
+      			<div class="text-end">Quantité dispo <span id="quantity">[[${article.quantity}]]</span></div>
       			<div class="fst-italic my-2"> [[${article.description}]] </div>
-      			<div> [[${article.prix}]]€ </div>
+      			<div id="prix"> [[${article.prix}]]€ </div>
       		</div>
       		
       		<div class="col-2">
@@ -32,9 +33,10 @@
       						<input type="text" th:field="*{quantity}" id="input" value="1" class="form-control text-center" style="max-width: 55px; height: 45px;" />
       					</li>
       					<li class="page-item">
-      						<a href="" id="plus" class="page-link"><b>+</b></a>
+      						<button id="plus" class="page-link"><b>+</b></button>
       					</li>
       				</ul>
+      				<div id="somme" class="text-center mb-1 bg-light">[[${article.prix}]]€</div>
    					<div class="page-item">
    						<button class="btn btn-outline-success p-1" type="submit">ajouter au panier</button>
    					</div>
@@ -48,21 +50,44 @@
             
         <!-- Footer-->
 		 <th:block th:replace="_commun :: footer"></th:block>
+		 
 		 <script type="text/javascript">
 		 
-		 byId("plus").addEventListener("click", (e) => {
-			 e.preventDefault();
-			 byId('input').value++;
-			 console.log( byId("moins") );
-		 });
+		 	let quantity = byId('quantity').innerText;
+		 	let plus = byId("plus");
+		 	var sommeTotale = byId('somme');
 		 
-		 byId("moins").addEventListener("click", (e) => {
-			 e.preventDefault();
-			 byId('input').value--;
-			 if(byId('input').value <= 0){
-				 byId('input').value = 1;
+			 plus.addEventListener("click", (e) => {
+				 e.preventDefault();
+				 byId('input').value++;
+				 if( byId('input').value > parseInt(quantity) ){
+					 alert("quantité max " + quantity)
+					 byId('input').value = quantity;
+					 
+					 plus.disabled = true;
+				 }
+				 somme(byId('input').value);
+			 });
+			 
+			 byId("moins").addEventListener("click", (e) => {
+				 e.preventDefault();
+				 byId('input').value--;
+				 if(byId('input').value <= 0){
+					 byId('input').value = 1;
+				 }
+				 somme(byId('input').value);
+				 plus.disabled = false;
+			 });
+			 
+			 function somme(valInput){
+				var prix = parseFloat( byId('prix').innerText )
+				sommeTotale.innerText = new Intl.NumberFormat().format(prix*valInput) + "€";
+				
+				sommeTotale.classList.add("fond");
+				setInterval( () => {
+					sommeTotale.classList.remove("fond");
+				}, 2000)
 			 }
-		 });
 		 
 		 
 		 	function byId(id){return document.getElementById(id); }
