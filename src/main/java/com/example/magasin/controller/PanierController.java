@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.magasin.modele.Panier;
@@ -60,6 +61,36 @@ public class PanierController {
     }
     
     
+    @PostMapping("/update/panier/{id_panier}/{qtt}")
+    public Panier updatePanier(
+                            HttpSession session, 
+                            @PathVariable("id_panier") int id_panier,
+                            @PathVariable("qtt") int qtt,
+                            RedirectAttributes redirectAttributes,
+                            HttpServletRequest request
+                            ) {
+        
+        
+        if( session.getAttribute( "user" ) == null ) {
+            redirectAttributes.addFlashAttribute( "message", "Veuillez vous connecter pour ajouter votre article" );
+            redirectAttributes.addFlashAttribute( "referer", request.getHeader( "referer" ) );
+            
+         //   return "redirect:/user/connexion";
+        }
+        
+       // panier.setUser( (User) session.getAttribute( "user" ) );
+        
+        Panier panier = panierRepository.getById( id_panier );
+       
+        if( panier != null ) {
+            panier.setQuantity( qtt );
+            panierRepository.save( panier );
+        }
+        
+        return panier;
+    }
+    
+    
     
     @GetMapping("/panier/{user}/{user_id}")
     public String panier(@PathVariable("user") String userName,
@@ -70,7 +101,7 @@ public class PanierController {
         List<Panier> panier = panierRepository.findByUser( userRepository.getById( userId ) );
         
         model.addAttribute( "paniers", panier );
-        session.setAttribute( "panier", panierRepository.findByUser( userRepository.getById( userId ) ) );
+        session.setAttribute( "panier", panier );
         
         return "panier/panier";
     }

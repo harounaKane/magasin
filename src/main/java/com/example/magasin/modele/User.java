@@ -50,5 +50,8 @@ public class User {
 	@OneToMany(mappedBy = "user")
     private List<Panier> panier = new ArrayList<>();
 	
+	@OneToMany( mappedBy = "user" )
+	private List<Commande> commandes = new ArrayList<>();
+	
 
 }
