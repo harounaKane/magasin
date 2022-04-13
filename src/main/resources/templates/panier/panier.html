@@ -46,7 +46,7 @@
 					      				</ul>
 					      			</form>
 					      			<div>X [[${panier.article.prix}]]€</div>
-					      			<div class="fw-bold" >= <span class="somme" th:sommeId="'somme' + ${panier.id}">[[${panier.article.prix}*${panier.quantity}]]</span>€</div>
+					      			<div class="fw-bold" >= <span class="somme" th:id="'somme' + ${panier.id}">[[${panier.article.prix}*${panier.quantity}]]</span>€</div>
         						</div>
         					</div>
         				</div>
@@ -55,7 +55,12 @@
         		<div class="col-4">
         			Total panier
         			<div class="my-2"><span id="resultat"></span>€</div>
-        			<a th:href="@{/commande/add/__${session.user.id_user}__}" class="btn btn-primary">Valider</a>
+<!--         			<a th:href="@{/commande/add/}" class="btn btn-primary">Valider</a> -->
+        				<!-- Button trigger modal -->
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="modal">
+					  Valider
+					</button>
         			<a th:href="@{/}" class="btn btn-primary">Continuer mes achats</a>
         		</div>
         	</div>
@@ -67,77 +72,27 @@
             
         <!-- Footer-->
 		 <th:block th:replace="_commun :: footer"></th:block>
-		 
-		<script type="text/javascript">
-			
-			//MOINS
- 			$(".moins").click( function(e) {
- 				e.preventDefault();
- 				var id_panier = $(this).attr("id");
- 				
- 				//RECUP VALEUR INPUT
- 				var input = $("#input" + id_panier);
- 				var quantityInput = input.val() - 1;
- 				
-				if( quantityInput <= 0 )
-					quantityInput = 1
-					
-				input.val(quantityInput);
-				
-				$.ajax({
-					url: "/update/panier/"+id_panier+"/"+quantityInput,
-					type: 'POST',
-					data: {id_panier: id_panier, qtt: quantityInput},
-					success: function(result){
-						var res = JSON.parse(result);
-						console.log(res);
-					}
-				});
-				
- 			} );
- 			
- 			
- 			//PLUS
- 			$(".plus").click( function(e) {
- 				e.preventDefault();
 
- 				//RECUP VALEUR INPUT
- 				var id_panier = $(this).attr("pid");
- 				var input = $("#input" + id_panier);
- 				var quantityInput = parseInt(input.val()) + 1;
- 			
- 				//RECUP QTT DISPO
- 				var quantity = parseInt( $("#quantity" + id_panier).text() );
-				
-				if( quantityInput > quantity )
-					quantityInput = quantity; 
-					
-				input.val(quantityInput);
-				
-				$.ajax({
-					url: "/update/panier/"+id_panier+"/"+quantityInput,
-					type: 'POST',
-					data: {id_panier: id_panier, qtt: quantityInput},
-					success: function(result){
-						
-					}
-				});
-				
- 			} );
-			
- 			//SOMME TOTALE PANIER
- 			sommeElt = document.getElementsByClassName("somme");
-		 	total = 0;
-		 	
- 			for(i=0; i<sommeElt.length; i++){
- 				sommeElt[i].innerHTML = Math.round( sommeElt[i].innerText * 100 ) / 100;
- 				total += parseFloat( sommeElt[i].innerHTML );
- 			}
- 			
- 			document.getElementById('resultat').innerHTML = new Intl.NumberFormat().format(total);
- 			
- 			
-		 	
-		</script>
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">Validation du panier</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		        Total panier : <span id="panierModal"></span>€
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		        <a th:href="@{/commande/add/}" class="btn btn-primary">Valider</a>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	
+	
     </body>
 </html>

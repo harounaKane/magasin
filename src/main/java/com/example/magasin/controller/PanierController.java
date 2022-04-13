@@ -61,37 +61,6 @@ public class PanierController {
     }
     
     
-    @PostMapping("/update/panier/{id_panier}/{qtt}")
-    public Panier updatePanier(
-                            HttpSession session, 
-                            @PathVariable("id_panier") int id_panier,
-                            @PathVariable("qtt") int qtt,
-                            RedirectAttributes redirectAttributes,
-                            HttpServletRequest request
-                            ) {
-        
-        
-        if( session.getAttribute( "user" ) == null ) {
-            redirectAttributes.addFlashAttribute( "message", "Veuillez vous connecter pour ajouter votre article" );
-            redirectAttributes.addFlashAttribute( "referer", request.getHeader( "referer" ) );
-            
-         //   return "redirect:/user/connexion";
-        }
-        
-       // panier.setUser( (User) session.getAttribute( "user" ) );
-        
-        Panier panier = panierRepository.getById( id_panier );
-       
-        if( panier != null ) {
-            panier.setQuantity( qtt );
-            panierRepository.save( panier );
-        }
-        
-        return panier;
-    }
-    
-    
-    
     @GetMapping("/panier/{user}/{user_id}")
     public String panier(@PathVariable("user") String userName,
                          @PathVariable("user_id") int userId,

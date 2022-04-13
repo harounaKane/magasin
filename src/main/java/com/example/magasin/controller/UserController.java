@@ -73,7 +73,7 @@ public class UserController {
         if( referer != null ) {
             return "redirect:" + referer;
         }
-        System.out.println( user );
+
         return "redirect:/";
     }
     
